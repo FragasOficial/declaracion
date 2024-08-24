@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Declaração</title>
+    <link rel="stylesheet" href="./reset.css">
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="./transf.js" defer></script>
+</head>
+<body>
+    <main>
+        <header>
+            <img src="./img/header-declaration.png" alt="" id="headerImg">
+            <h1>DECLARAÇÃO</h1>
+        </header>
+        <article>
+            <form id="declaracaoForm">
+                <label for="temPai">Tem Pai?</label>
+                <select id="temPai" name="temPai" required>
+                    <option value="sim">Sim</option>
+                    <option value="nao">Não</option>
+                </select><br><br>
+
+                <label for="sexo">Sexo:</label>
+                <select id="sexo" name="sexo" required>
+                    <option value="masculino">Masculino</option>
+                    <option value="feminino">Feminino</option>
+                </select><br><br>
+
+                <label for="nomeCompleto">Nome Completo:</label>
+                <input type="text" id="nomeCompleto" name="nomeCompleto" required><br><br>
+
+                <label for="dataNascimento">Data de Nascimento:</label>
+                <input type="date" id="dataNascimento" name="dataNascimento" required><br><br>
+
+                <label for="nomePai">Nome do Pai:</label>
+                <input type="text" id="nomePai" name="nomePai"><br><br>
+
+                <label for="anoCursado">Ano Cursado:</label>
+                <input type="text" id="anoCursado" name="anoCursado" required><br><br>
+
+                <label for="dataAtual">Data Atual:</label>
+                <input type="date" id="dataAtual" name="dataAtual" required><br><br>
+
+                <label for="local">Local:</label>
+                <input type="text" id="local" name="local" required><br><br>
+
+                <button type="submit">Gerar Declaração</button>
+            </form>
+        </article>  
+    </main>
+    <footer>
+        <div class="ultimate">
+            <p class="titleFooter">Endereço:</p>
+            <p class="cardFooter">Sítio Oiticica, Frecheirinha - CE</p>
+            <p class="cardFooter">E-mail: naircunha2018@hotmail.com</p>
+        </div>
+        <div class="ultimate">
+            <p class="titleFooter">Redes Sociais:</p>
+            <p class="cardFooter">Facebook:</p>
+            <p class="cardFooter">Instagram:</p>
+        </div>
+        <div class="direitosReservados">
+            <p>@Todos os direitos reservados</p>
+            <p>TecInove Solutions </p>
+            <p>2024 </p>
+        </div>
+    </footer>
+</body>
+</html>

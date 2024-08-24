@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css">
+    <title>Seleção de Declaração</title>
+</head>
+<body>
+    <header>
+        <h1>Faça sua declaração em poucos minutos</h1>
+    </header>
+    <div class="containnerForm">
+        <h1 class="escolher">Selecione o Tipo de Declaração</h1>
+        <form id="declaracaoForm" action="" method="GET">
+            <label for="selectDeclaracao">Tipo de Declaração:</label>
+            <select id="selectDeclaracao" name="declaracao" required>
+                <option value="">Selecione</option>
+                <option value="transferencia.html">Transferência</option>
+                <option value="comprovacao_estudos.html">Comprovação de Estudos</option>
+                <option value="frequencia_escolar.html">Frequência Escolar</option>
+                <option value="conclusao_9_ano.html">Conclusão 9º Ano</option>
+            </select><br><br>
+
+            <a href="./decForm.html"><button type="submit">Prosseguir</button></a>
+        </form> 
+    </div>
+    
+    <!-- <footer>
+        <div class="ultimate">
+            <p class="titleFooter">Endereço:</p>
+            <p class="cardFooter">Sítio Oiticica, Frecheirinha - CE</p>
+            <p class="cardFooter">E-mail: naircunha2018@hotmail.com</p>
+        </div>
+        <div class="ultimate">
+            <p class="titleFooter">Redes Sociais:</p>
+            <p class="cardFooter">Facebook:</p>
+            <p class="cardFooter">Instagram:</p>
+        </div>
+        <div class="direitosReservados">
+            <p>@Todos os direitos reservados</p>
+            <p>TecInove Solutions </p>
+            <p>2024 </p>
+        </div>
+    </footer> -->
+    <script>
+        document.getElementById('declaracaoForm').onsubmit = function() {
+            const select = document.getElementById('selectDeclaracao');
+            if (select.value) {
+                this.action = select.value;
+            } else {
+                alert('Por favor, selecione o tipo de declaração.');
+                return false;
+            }
+        };
+    </script>
+</body>
+</html>
+
+    
