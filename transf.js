@@ -24,10 +24,11 @@ document.addEventListener('DOMContentLoaded', function () {
         nomePaiInput.style.display = 'none';
     }
 
-    // Lógica para gerar a declaração com base nos dados inseridos
+    // Lógica para confirmar os dados e gerar a declaração
     document.getElementById('declaracaoForm').addEventListener('submit', function (event) {
         event.preventDefault();  // Evitar o envio do formulário padrão
 
+        // Capturar os valores do formulário
         const nomeCompleto = document.getElementById('nomeCompleto').value;
         const dataNascimento = document.getElementById('dataNascimento').value;
         const anoCursado = document.getElementById('anoCursado').value;
@@ -46,6 +47,40 @@ document.addEventListener('DOMContentLoaded', function () {
             ensinoFundamental = 'fundamental II';
         }
 
+        // Exibir uma tela de confirmação dos dados
+        const confirmationMessage = `
+            Confirme os dados abaixo:
+            Nome Completo: ${nomeCompleto}
+            Data de Nascimento: ${new Date(dataNascimento).toLocaleDateString('pt-BR')}
+            Ano Cursado: ${anoCursado}
+            Ensino Fundamental: ${ensinoFundamental}
+            Nome da Mãe: ${nomeMae}
+            ${temPai === 'sim' ? `Nome do Pai: ${nomePai}` : ''}
+            Sexo: ${sexo}
+            Data Atual: ${dataAtual}
+            Local: ${local}
+        `;
+        if (confirm(confirmationMessage)) {
+            // Se o usuário confirmar, gerar o PDF
+            generatePDF({
+                nomeCompleto,
+                dataNascimento,
+                anoCursado,
+                nomeMae,
+                sexo,
+                temPai,
+                nomePai,
+                dataAtual,
+                local,
+                ensinoFundamental
+            });
+        } else {
+            // Caso contrário, permitir que o usuário corrija os dados
+            alert("Por favor, corrija os dados necessários.");
+        }
+    });
+
+    function generatePDF({ nomeCompleto, dataNascimento, anoCursado, nomeMae, sexo, temPai, nomePai, dataAtual, local, ensinoFundamental }) {
         // Gerar o PDF usando jsPDF
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
@@ -65,17 +100,17 @@ document.addEventListener('DOMContentLoaded', function () {
         const pageWidth = doc.internal.pageSize.getWidth();
         const textWidth = pageWidth - marginLeft - marginRight;
 
-        doc.text(bodyText, marginLeft, 105, {align: 'justify', maxWidth: textWidth });
+        doc.text(bodyText, marginLeft, 105, { align: 'justify', maxWidth: textWidth });
 
         // Data e Local
-        doc.text(`${local}, ${dataAtual}`, 109, 140, {align: 'left', maxWidth: textWidth});
+        doc.text(`${local}, ${dataAtual}`, 109, 140, { align: 'left', maxWidth: textWidth });
 
         // Assinatura
         doc.text("______________________________________________", 105, 190, null, null, 'center');
         doc.text("Sílvia Regina Cunha Brandão Silva", 105, 195, null, null, 'center');
-        doc.text("Diretora", 105, 200, null, null, 'center', 'border');
+        doc.text("Diretora", 105, 200, null, null, 'center');
 
         // Gerar o PDF
         doc.save('declaracao.pdf');
-    });
+    }
 });
