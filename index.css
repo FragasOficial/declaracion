@@ -101,6 +101,8 @@ h1{
         color: black;
         display: flex;
         font-size: large;
+        width: 50%;
+        max-width: 100%;
     }
     
 
@@ -138,10 +140,12 @@ h1{
     }
 
     button{
+        font-size: large;
+        width: 50%;
         background-color: black;
         color: white;
         padding: 0.5rem;
-        border-radius: 0.3rem;
+        border-radius: 0.8rem;
     }
 
     button:hover{
