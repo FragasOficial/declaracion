@@ -1,4 +1,5 @@
 /* Estilos básicos para formatação da página */
+@import url(./reset.css);
 body {
     margin: 0 auto;
     font-family: Arial, sans-serif;

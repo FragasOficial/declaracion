@@ -1,7 +1,10 @@
-
 document.addEventListener('DOMContentLoaded', function () {
     const temPaiSelect = document.getElementById('temPai');
     const nomePaiInput = document.getElementById('nomePai');
+    const headerImg = document.getElementById('headerImg');
+
+    // Ajustar a altura da imagem para 80% da largura
+    headerImg.style.height = (headerImg.width * 0.8) + 'px';
 
     // Mostrar ou esconder o campo "Nome do Pai" baseado na seleção "Tem Pai?"
     temPaiSelect.addEventListener('change', function () {
@@ -28,42 +31,49 @@ document.addEventListener('DOMContentLoaded', function () {
         const nomeCompleto = document.getElementById('nomeCompleto').value;
         const dataNascimento = document.getElementById('dataNascimento').value;
         const anoCursado = document.getElementById('anoCursado').value;
-        const dataAtual = document.getElementById('dataAtual').value;
-        const local = document.getElementById('local').value;
+        const nomeMae = document.getElementById('nomeMae').value;
         const sexo = document.getElementById('sexo').value;
         const temPai = temPaiSelect.value;
-        let nomePai = '';
+        const nomePai = temPai === 'sim' ? nomePaiInput.value : '';
+        const dataAtual = new Date().toLocaleDateString('pt-BR');
+        const local = "Sítio Oiticica, Frecheirinha - CE";
 
-        if (temPai === 'sim') {
-            nomePai = nomePaiInput.value;
+        // Determinar o tipo de ensino fundamental
+        let ensinoFundamental = '';
+        if (["1º ano", "2º ano", "3º ano", "4º ano", "5º ano"].includes(anoCursado)) {
+            ensinoFundamental = 'fundamental I';
+        } else if (["6º ano", "7º ano", "8º ano", "9º ano"].includes(anoCursado)) {
+            ensinoFundamental = 'fundamental II';
         }
 
         // Gerar o PDF usando jsPDF
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
 
+        // Adiciona o cabeçalho com a imagem
+        doc.addImage('./img/header-declaration.png', 'PNG', 20, 10, 170, 60);
+
         // Título
         doc.setFontSize(18);
-        doc.text("DECLARAÇÃO", 105, 20, null, null, 'center');
+        doc.text("DECLARAÇÃO", 105, 90, null, null, 'center');
 
-        // Corpo do PDF
+        // Corpo do PDF - Justificado e alinhado
         doc.setFontSize(12);
-        doc.text(`Declaro para os devidos fins de prova, que ${nomeCompleto},`, 20, 40);
-        doc.text(`nascid${sexo === 'masculino' ? 'o' : 'a'} dia ${new Date(dataNascimento).toLocaleDateString('pt-BR')}, alun${sexo === 'masculino' ? 'o' : 'a'}`, 20, 50);
-        doc.text(`do ${anoCursado} do ensino fundamental II,`, 20, 60);
-        if (temPai === 'sim') {
-            doc.text(`filh${sexo === 'masculino' ? 'o' : 'a'} de ${nomePai},`, 20, 70);
-        }
-        doc.text(`solicitou transferência na presente data.`, 20, 80);
+        const bodyText = `Declaro para os devidos fins de prova, que ${nomeCompleto}, nascid${sexo === 'masculino' ? 'o' : 'a'} em ${new Date(dataNascimento).toLocaleDateString('pt-BR')}, alun${sexo === 'masculino' ? 'o' : 'a'} do ${anoCursado} do ${ensinoFundamental}, filh${sexo === 'masculino' ? 'o' : 'a'} de ${nomeMae}${temPai === 'sim' ? ` e ${nomePai}` : ''}, solicitou transferência na presente data. O referido é verdade, e dou fé.`;
+        const marginLeft = 20;
+        const marginRight = 20;
+        const pageWidth = doc.internal.pageSize.getWidth();
+        const textWidth = pageWidth - marginLeft - marginRight;
 
-        // Desfecho
-        doc.text(`O referido é verdade, e dou fé.`, 20, 100);
-        doc.text(`${local}, ${new Date(dataAtual).toLocaleDateString('pt-BR')}`, 20, 110);
+        doc.text(bodyText, marginLeft, 105, {align: 'justify', maxWidth: textWidth });
+
+        // Data e Local
+        doc.text(`${local}, ${dataAtual}`, 109, 140, {align: 'left', maxWidth: textWidth});
 
         // Assinatura
-        doc.text("______________________________________________", 20, 140);
-        doc.text("Sílvia Regina Cunha Brandão Silva", 20, 150);
-        doc.text("Diretora", 20, 160);
+        doc.text("______________________________________________", 105, 190, null, null, 'center');
+        doc.text("Sílvia Regina Cunha Brandão Silva", 105, 195, null, null, 'center');
+        doc.text("Diretora", 105, 200, null, null, 'center', 'border');
 
         // Gerar o PDF
         doc.save('declaracao.pdf');

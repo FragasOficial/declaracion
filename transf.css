@@ -1,0 +1,125 @@
+/* Estilos básicos para formatação da página */
+@import url(./reset.css);
+body {
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 1.25rem;
+}
+
+img{
+    display: none;
+
+}
+
+h1{
+    margin-top: 3rem;
+}
+
+article{
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    border-radius: 0.8rem;
+    background-color: rgb(14, 143, 100);
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 50%;
+}
+
+form {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+#temPai, #sexo, #nomeCompleto, 
+#dataNascimento, #nomePai, #nomeMae, 
+#anoCursado, #dataAtual, #local {
+    margin-bottom: -1rem;
+    height: 2rem;
+    font-size: medium;
+    border-radius: 0.3rem;
+}
+
+#temPai{
+    text-align: center;
+    width: 15%;
+}
+
+#nomeCompleto, #nomePai, #nomeMae {
+    width: 80%;
+}
+
+button{
+    margin-left: 33%;
+    margin-top: 2rem;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    border: 0.01rem solid gray;
+    border-radius: 0.5rem;
+    text-transform: uppercase;
+    padding: 1rem;
+    font-size: medium;
+    cursor: pointer;
+}
+
+button:hover{
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+    transition-duration: 3s;
+    border: 0.01rem solid white;
+    background-color: red;
+    color: white;
+}
+
+footer{
+    margin: 0 auto;
+    margin-top: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgb(75, 75, 75);
+    color: white;
+    text-align:  center;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    height: 12vw;
+}
+
+.ultimate{
+    text-align: justify;
+}
+
+.titleFooter{
+    font-weight: bolder;
+}
+
+.direitosReservados{
+    text-align: center;
+}
+
+#paiContainer, #coordenadoraContainer {
+    display: block;
+}
+
+#declarationOutput {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #000;
+    white-space: pre-wrap;
+    line-height: 1.5;
+}
