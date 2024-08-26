@@ -25,13 +25,21 @@ header{
     padding-bottom: 5rem;
     width: 100%;
     max-width: 100%;
+    margin-bottom: 5rem;
+}
+
+img{
+    width: 100%;
+    height: 80vw;
+    max-width: 100%;
 }
 
 h1{
-    width: 50%;
+    width: 100%;
     color: black;
     font-size: 1.8rem;
     text-transform: uppercase;
+    margin-bottom: 1rem;
 }
 
 .escolher{
@@ -133,6 +141,15 @@ footer{
         padding-bottom: 3rem;
         width: 90%;
         max-width: 100%;
+        margin-bottom: 8rem;
+        height: 80vw;
+    }
+
+    img{
+        width: 100%;
+        height: 80vw;
+        max-width: 100%;
+        border-radius: 1rem;
     }
     
     h1{
@@ -142,21 +159,21 @@ footer{
         color: black;
         font-size: 130%;
         text-transform: uppercase;
+
     }
     
     .escolher{
         width: 80%;
         margin: 0 auto;
         font-size: 100%;
-        color: white;
+        color: black;
         text-align: center;
         justify-content: center;
         text-align: center;
-        margin-bottom: 3rem;
     }
     
     .containnerForm{
-        background-color: rgb(14, 143, 100);
+        background-color: ivory;
         border-radius: 0.2rem;
         border: 0.01rem solid gray;
         display: flex;
@@ -166,12 +183,12 @@ footer{
         justify-content: center;
         margin: 0 auto;
         margin-bottom: 100%;
-        padding-top: 2rem;
-        width:95%;
+        padding-top: 1rem;
+        width:98%;
         max-width: 100%;
         height: 18rem;
         max-height: 100%;
-        color: white;
+        color: black;
     }
     
     label{
@@ -217,16 +234,17 @@ footer{
         margin: 0 auto;
         width: 100%;
         max-width: 100%;
-        display: flex;
+        display: table-cell;
         flex-wrap: wrap;
         background-color: rgb(75, 75, 75);
         color: white;
         margin-top: 3rem;
         text-align:  left;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: center;
         align-items: center;
-        height: 36vw;
+        height: 60vw;
+        max-height: 100%;
     }
 
     button:hover{
@@ -238,6 +256,7 @@ footer{
     }
     
     .ultimate{
+        align-items: center;
         text-align: justify;
         margin-bottom: 1rem;
     }
