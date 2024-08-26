@@ -147,25 +147,27 @@ footer{
     .escolher{
         width: 80%;
         margin: 0 auto;
-        font-size: 120%;
+        font-size: 100%;
         color: white;
         text-align: center;
         justify-content: center;
         text-align: center;
+        margin-bottom: 3rem;
     }
     
     .containnerForm{
         background-color: rgb(14, 143, 100);
-        border-radius: 0.6rem;
+        border-radius: 0.2rem;
         border: 0.01rem solid gray;
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
-        /* align-items: center; */
-        /* justify-content: center; */
+        align-items: center;
+        justify-content: center;
         margin: 0 auto;
+        margin-bottom: 100%;
         padding-top: 2rem;
-        width:75%;
+        width:95%;
         max-width: 100%;
         height: 18rem;
         max-height: 100%;
@@ -186,13 +188,12 @@ footer{
         border-radius: 0.5rem;
         width: 75%;
         max-width: 100%;
-        margin-top: -2re;
     }
     
     button{
         width: 50%;
         max-width: 100%;
-        height: 7vw;
+        height: 12vw;
         max-height: 100%;
         background-color: rgb(66, 66, 66);
         color: white;
