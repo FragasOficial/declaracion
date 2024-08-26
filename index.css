@@ -161,43 +161,46 @@ footer{
         display: flex;
         flex-wrap: wrap;
         flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        /* align-items: center; */
+        /* justify-content: center; */
         margin: 0 auto;
         padding-top: 2rem;
-        align-items: center;
         width:95%;
-        height: 95vw;
         max-width: 100%;
+        height: 18rem;
+        max-height: 100%;
         color: white;
     }
     
     label{
-        font-size: 1rem;
+        font-size: 1.1rem;
     }
     
     #selectDeclaracao{
-        font-size: larger;
-        text-align: left;
+        font-size: large;
+        text-align: center;
         display: flex;
         flex-wrap: wrap;
         flex-direction: column;
-        height: 2.3rem;
-        border-radius: 1rem;
-        width: 100%;
+        height: 2rem;
+        border-radius: 0.5rem;
+        width: 75%;
         max-width: 100%;
     }
     
     button{
         width: 50%;
-        height: 3vw;
+        max-width: 100%;
+        height: 17vw;
+        max-height: 100%;
         background-color: rgb(66, 66, 66);
         color: white;
         border-radius: 1rem;
-        margin-top: -1.5rem;
         font-size: medium;
         cursor: pointer;
         border: 0.01rem solid gray;
+        margin-bottom: 2rem;
+    
     }
     
     button:hover{
@@ -207,8 +210,10 @@ footer{
     }
     
     footer{
+        font-size: 0.96rem;
         margin: 0 auto;
         width: 100%;
+        max-width: 100%;
         display: flex;
         flex-wrap: wrap;
         background-color: rgb(75, 75, 75);
@@ -218,7 +223,7 @@ footer{
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        height: 12vw;
+        height: 90vw;
     }
     
     .ultimate{
