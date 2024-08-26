@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Corpo do PDF - Justificado e alinhado
         doc.setFontSize(12);
-        const bodyText = `Declaro para os devidos fins de prova que ${nomeCompleto}, nascid${sexo === 'masculino' ? 'o' : 'a'} dia ${dataNascimento}, filh${sexo === 'masculino' ? 'o' : 'a'} de ${nomeMae}${temPai === 'sim' ? ` e ${nomePai}` : ''}, alun${sexo === 'masculino' ? 'o' : 'a'} do ${anoCursado} do ensino ${ensinoFundamental}, solicitou transferência desta unidade de ensino na presente data.`;
+        const bodyText = `Declaro para os devidos fins de prova que ${nomeCompleto}, nascid${sexo === 'masculino' ? 'o' : 'a'} dia ${dataNascimento}, filh${sexo === 'masculino' ? 'o' : 'a'} de ${nomeMae}${temPai === 'sim' ? ` e ${nomePai}` : ''}, alun${sexo === 'masculino' ? 'o' : 'a'} do ${anoCursado} do ensino ${ensinoFundamental}, está frequentando regularmente esta unidade de ensino até a presente data deste ano letivo.`;
         const marginLeft = 20;
         const marginRight = 20;
         const pageWidth = doc.internal.pageSize.getWidth();

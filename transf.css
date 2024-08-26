@@ -20,6 +20,38 @@ h1{
     margin-top: 3rem;
 }
 
+h2{
+    display: flex;
+    margin: 0 auto;
+    width: 56%;
+    max-width: 100%;
+    font-weight: normal;
+}
+
+h3{
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    width: 56%;
+    max-width: 100%;
+    font-weight: normal;
+}
+
+.headerForm{
+    text-transform: uppercase;
+    font-weight: bold;
+    margin: 0 auto;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: larger;
+    color: white;
+    margin-bottom: 2rem;
+    width: 90%;
+    max-width: 100%;
+}
+
 article{
     align-items: center;
     justify-content: center;
@@ -46,13 +78,22 @@ form {
     margin: 0 auto;
 }
 
-#temPai, #sexo, #nomeCompleto, 
+#temPai, #sexo, #nomeCompleto, #anos, #years,
 #dataNascimento, #nomePai, #nomeMae, 
 #anoCursado, #dataAtual, #local {
     margin-bottom: -1rem;
     height: 2rem;
     font-size: medium;
     border-radius: 0.3rem;
+}
+
+#anoCursado, #dataNascimento, #anos, #years{
+    width: 25%;
+    max-width: 100%;
+}
+
+#anos{
+    margin-bottom: 1rem;
 }
 
 #temPai{
@@ -62,6 +103,7 @@ form {
 
 #nomeCompleto, #nomePai, #nomeMae {
     width: 80%;
+    text-transform: uppercase;
 }
 
 button{
@@ -191,7 +233,7 @@ footer{
         width: 36%;
     } 
     #anoCursado, #dataNascimento{
-        width: 40%;
+        width: 50%;
     }
     
     #temPai{

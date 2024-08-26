@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const nomeCompleto = document.getElementById('nomeCompleto').value.toUpperCase();
         const dataNascimento = document.getElementById('dataNascimento').value;
         const anoCursado = document.getElementById('anoCursado').value;
+        const anoConclusao = document.getElementById('anos').value;  // Capturar o ano de conclusão
         const nomeMae = document.getElementById('nomeMae').value.toUpperCase();
         const sexo = document.getElementById('sexo').value;
         const temPai = temPaiSelect.value;
@@ -57,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
             Nome Completo: ${nomeCompleto}
             Data de Nascimento: ${dataNascimentoCorrigida}
             Ano Cursado: ${anoCursado}
+            Ano de Conclusão: ${anoConclusao}
             Ensino Fundamental: ${ensinoFundamental}
             Nome da Mãe: ${nomeMae}
             ${temPai === 'sim' ? `Nome do Pai: ${nomePai}` : ''}
@@ -70,6 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 nomeCompleto,
                 dataNascimento: dataNascimentoCorrigida,
                 anoCursado,
+                anoConclusao,
                 nomeMae,
                 sexo,
                 temPai,
@@ -84,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    function generatePDF({ nomeCompleto, dataNascimento, anoCursado, nomeMae, sexo, temPai, nomePai, dataAtual, local, ensinoFundamental }) {
+    function generatePDF({ nomeCompleto, dataNascimento, anoCursado, anoConclusao, nomeMae, sexo, temPai, nomePai, dataAtual, local, ensinoFundamental }) {
         // Gerar o PDF usando jsPDF
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
@@ -98,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Corpo do PDF - Justificado e alinhado
         doc.setFontSize(12);
-        const bodyText = `Declaro para os devidos fins de prova que ${nomeCompleto}, nascid${sexo === 'masculino' ? 'o' : 'a'} dia ${dataNascimento}, filh${sexo === 'masculino' ? 'o' : 'a'} de ${nomeMae}${temPai === 'sim' ? ` e ${nomePai}` : ''}, alun${sexo === 'masculino' ? 'o' : 'a'} do ${anoCursado} do ensino ${ensinoFundamental}, solicitou transferência desta unidade de ensino na presente data.`;
+        const bodyText = `Declaro para os devidos fins de prova que ${nomeCompleto}, nascid${sexo === 'masculino' ? 'o' : 'a'} dia ${dataNascimento}, filh${sexo === 'masculino' ? 'o' : 'a'} de ${nomeMae}${temPai === 'sim' ? ` e ${nomePai}` : ''}, concluiu o ${anoCursado} do ensino ${ensinoFundamental} nesta unidade de ensino no ano de ${anoConclusao}, e está apt${sexo === 'masculino' ? 'o' : 'a'} para prosseguir com seus estudos no ensino médio.`;
         const marginLeft = 20;
         const marginRight = 20;
         const pageWidth = doc.internal.pageSize.getWidth();
@@ -107,8 +110,8 @@ document.addEventListener('DOMContentLoaded', function () {
         doc.text(bodyText, marginLeft, 105, { align: 'justify', maxWidth: textWidth });
         doc.setFont(undefined, 'normal');  // Volta ao peso normal da fonte
 
-        //desfecho
-        doc.text('O referido é verdade e dou fé.', 20, 125, { align: 'left', maxWidth: textWidth })
+        // Desfecho
+        doc.text('O referido é verdade e dou fé.', 20, 130, { align: 'left', maxWidth: textWidth });
 
         // Data e Local
         doc.text(`${local}, ${dataAtual}`, 109, 150, { align: 'left', maxWidth: textWidth });
@@ -122,5 +125,3 @@ document.addEventListener('DOMContentLoaded', function () {
         doc.save('declaracao.pdf');
     }
 });
-
-

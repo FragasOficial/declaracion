@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const temPaiSelect = document.getElementById('temPai');
     const nomePaiInput = document.getElementById('nomePai');
     const headerImg = document.getElementById('headerImg');
+    const anosSelect = document.getElementById('anos');
+    const anoCursadoSelect = document.getElementById('anoCursado');
 
     // Ajustar a altura da imagem para 80% da largura
     headerImg.style.height = (headerImg.width * 0.8) + 'px';
@@ -24,6 +26,42 @@ document.addEventListener('DOMContentLoaded', function () {
         nomePaiInput.style.display = 'none';
     }
 
+    // Evento de mudança para ajustar as opções de "Ano Cursado" com base no "Ano de Conclusão"
+    anosSelect.addEventListener('change', function () {
+        const selectedAno = parseInt(anosSelect.value);
+        
+        // Limpar opções atuais
+        anoCursadoSelect.innerHTML = '';
+
+        if (selectedAno < 2007) {
+            // Adicionar séries em vez de anos
+            const series = [
+                "1ª série", "2ª série", "3ª série", "4ª série", "5ª série",
+                "6ª série", "7ª série", "8ª série"
+            ];
+
+            series.forEach(serie => {
+                const option = document.createElement('option');
+                option.value = serie;
+                option.textContent = serie;
+                anoCursadoSelect.appendChild(option);
+            });
+        } else {
+            // Adicionar anos
+            const anos = [
+                "1º ano", "2º ano", "3º ano", "4º ano", "5º ano",
+                "6º ano", "7º ano", "8º ano", "9º ano"
+            ];
+
+            anos.forEach(ano => {
+                const option = document.createElement('option');
+                option.value = ano;
+                option.textContent = ano;
+                anoCursadoSelect.appendChild(option);
+            });
+        }
+    });
+
     // Lógica para confirmar os dados e gerar a declaração
     document.getElementById('declaracaoForm').addEventListener('submit', function (event) {
         event.preventDefault();  // Evitar o envio do formulário padrão
@@ -31,7 +69,8 @@ document.addEventListener('DOMContentLoaded', function () {
         // Capturar os valores do formulário e transformar em maiúsculas
         const nomeCompleto = document.getElementById('nomeCompleto').value.toUpperCase();
         const dataNascimento = document.getElementById('dataNascimento').value;
-        const anoCursado = document.getElementById('anoCursado').value;
+        const anoCursado = anoCursadoSelect.value;
+        const selectedAno = anosSelect.value;
         const nomeMae = document.getElementById('nomeMae').value.toUpperCase();
         const sexo = document.getElementById('sexo').value;
         const temPai = temPaiSelect.value;
@@ -43,12 +82,20 @@ document.addEventListener('DOMContentLoaded', function () {
         const [ano, mes, dia] = dataNascimento.split('-');
         const dataNascimentoCorrigida = new Date(ano, mes - 1, dia).toLocaleDateString('pt-BR');
 
-        // Determinar o tipo de ensino fundamental
+        // Determinar o tipo de ensino fundamental ou série
         let ensinoFundamental = '';
-        if (["1º ano", "2º ano", "3º ano", "4º ano", "5º ano"].includes(anoCursado)) {
-            ensinoFundamental = 'fundamental I';
-        } else if (["6º ano", "7º ano", "8º ano", "9º ano"].includes(anoCursado)) {
-            ensinoFundamental = 'fundamental II';
+        if (selectedAno < 2007) {
+            if (["1ª série", "2ª série", "3ª série", "4ª série"].includes(anoCursado)) {
+                ensinoFundamental = 'fundamental I';
+            } else if (["5ª série", "6ª série", "7ª série", "8ª série"].includes(anoCursado)) {
+                ensinoFundamental = 'fundamental II';
+            }
+        } else {
+            if (["1º ano", "2º ano", "3º ano", "4º ano", "5º ano"].includes(anoCursado)) {
+                ensinoFundamental = 'fundamental I';
+            } else if (["6º ano", "7º ano", "8º ano", "9º ano"].includes(anoCursado)) {
+                ensinoFundamental = 'fundamental II';
+            }
         }
 
         // Exibir uma tela de confirmação dos dados
@@ -56,8 +103,9 @@ document.addEventListener('DOMContentLoaded', function () {
             Confirme os dados abaixo:
             Nome Completo: ${nomeCompleto}
             Data de Nascimento: ${dataNascimentoCorrigida}
-            Ano Cursado: ${anoCursado}
-            Ensino Fundamental: ${ensinoFundamental}
+            Ano de Conclusão: ${selectedAno}
+            ${anoCursado.includes('ano') || anoCursado.includes('série') ? `Ano/Série Cursada: ${anoCursado}` : `Ano Cursado: ${anoCursado}`}
+            Ensino: ${ensinoFundamental}
             Nome da Mãe: ${nomeMae}
             ${temPai === 'sim' ? `Nome do Pai: ${nomePai}` : ''}
             Sexo: ${sexo}
@@ -76,7 +124,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 nomePai,
                 dataAtual,
                 local,
-                ensinoFundamental
+                ensinoFundamental,
+                selectedAno // Adicionando o ano de conclusão
             });
         } else {
             // Caso contrário, permitir que o usuário corrija os dados
@@ -84,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    function generatePDF({ nomeCompleto, dataNascimento, anoCursado, nomeMae, sexo, temPai, nomePai, dataAtual, local, ensinoFundamental }) {
+    function generatePDF({ nomeCompleto, dataNascimento, anoCursado, nomeMae, sexo, temPai, nomePai, dataAtual, local, ensinoFundamental, selectedAno }) {
         // Gerar o PDF usando jsPDF
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
@@ -98,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Corpo do PDF - Justificado e alinhado
         doc.setFontSize(12);
-        const bodyText = `Declaro para os devidos fins de prova que ${nomeCompleto}, nascid${sexo === 'masculino' ? 'o' : 'a'} dia ${dataNascimento}, filh${sexo === 'masculino' ? 'o' : 'a'} de ${nomeMae}${temPai === 'sim' ? ` e ${nomePai}` : ''}, alun${sexo === 'masculino' ? 'o' : 'a'} do ${anoCursado} do ensino ${ensinoFundamental}, solicitou transferência desta unidade de ensino na presente data.`;
+        const bodyText = `Declaro para os devidos fins de prova que ${nomeCompleto}, nascid${sexo === 'masculino' ? 'o' : 'a'} dia ${dataNascimento}, filh${sexo === 'masculino' ? 'o' : 'a'} de ${nomeMae}${temPai === 'sim' ? ` e ${nomePai}` : ''}, cursou ${selectedAno < 2007 ? 'a' : 'o'} ${anoCursado.includes('ano') || anoCursado.includes('série') ? `${anoCursado} do ensino ${ensinoFundamental}` : anoCursado} neste estabelecimento de ensino no ano ${selectedAno}.`;
         const marginLeft = 20;
         const marginRight = 20;
         const pageWidth = doc.internal.pageSize.getWidth();
@@ -107,8 +156,8 @@ document.addEventListener('DOMContentLoaded', function () {
         doc.text(bodyText, marginLeft, 105, { align: 'justify', maxWidth: textWidth });
         doc.setFont(undefined, 'normal');  // Volta ao peso normal da fonte
 
-        //desfecho
-        doc.text('O referido é verdade e dou fé.', 20, 125, { align: 'left', maxWidth: textWidth })
+        // Desfecho
+        doc.text('O referido é verdade e dou fé.', 20, 125, { align: 'left', maxWidth: textWidth });
 
         // Data e Local
         doc.text(`${local}, ${dataAtual}`, 109, 150, { align: 'left', maxWidth: textWidth });
@@ -122,5 +171,3 @@ document.addEventListener('DOMContentLoaded', function () {
         doc.save('declaracao.pdf');
     }
 });
-
-
