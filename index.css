@@ -7,6 +7,7 @@
 }
 
 body{ 
+    background-color: rgb(219, 219, 230);
     margin: 0 auto;
     align-items: center;
     display: flex;
@@ -34,11 +35,12 @@ img{
 }
 
 h1{
-    width: 100%;
-    color: black;
+    width: 50%;
+    color: rgb(13, 125, 100);
     font-size: 1.8rem;
     text-transform: uppercase;
     margin-bottom: 1rem;
+    font-weight: bold;
 }
 
 .escolher{

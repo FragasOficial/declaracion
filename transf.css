@@ -232,7 +232,7 @@ footer{
     #sexo{
         width: 36%;
     } 
-    #anoCursado, #dataNascimento{
+    #anoCursado, #dataNascimento, #anos{
         width: 50%;
     }
     
@@ -244,6 +244,18 @@ footer{
         width: 95%;
         text-transform: uppercase;
         font-weight: bold;
+    }
+
+    /* COMPROVAÇÃO DE ESTUDOS*/
+    #years{
+        font-size: 1.3rem;
+        margin-bottom: -0.5rem;
+        width: 80%;
+    }
+
+    #anos{
+        height: 2.8rem;
+        font-size: x-large;
     }
     
     button{
