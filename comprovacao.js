@@ -178,6 +178,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const headerImg = document.getElementById('headerImg');
     const anosSelect = document.getElementById('anos');
     const anoCursadoSelect = document.getElementById('anoCursado');
+    const dataNascimentoInput = document.getElementById('dataNascimento');
 
     // Ajustar a altura da imagem para 80% da largura
     headerImg.style.height = (headerImg.width * 0.8) + 'px';
@@ -242,7 +243,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Capturar os valores do formulário e transformar em maiúsculas
         const nomeCompleto = document.getElementById('nomeCompleto').value.toUpperCase();
-        const dataNascimento = document.getElementById('dataNascimento').value.toUpperCase(); // Captura manual
+        const dataNascimento = dataNascimentoInput.value; // Captura através do input type date
         const anoCursado = anoCursadoSelect.value;
         const selectedAno = anosSelect.value;
         const nomeMae = document.getElementById('nomeMae').value.toUpperCase();
@@ -252,8 +253,9 @@ document.addEventListener('DOMContentLoaded', function () {
         const dataAtual = new Date().toLocaleDateString('pt-BR');
         const local = "Sítio Oiticica, Frecheirinha - CE";
 
-        // Não é mais necessário corrigir a data de nascimento
-        const dataNascimentoCorrigida = dataNascimento;
+        // Corrigir a data de nascimento para evitar erro de fuso horário
+        const [ano, mes, dia] = dataNascimento.split('-');
+        const dataNascimentoCorrigida = new Date(ano, mes - 1, dia).toLocaleDateString('pt-BR');
 
         // Determinar o tipo de ensino fundamental ou série
         let ensinoFundamental = '';
@@ -344,4 +346,6 @@ document.addEventListener('DOMContentLoaded', function () {
         doc.save('declaracao.pdf');
     }
 });
+
+
 
