@@ -232,8 +232,12 @@ footer{
     #sexo{
         width: 36%;
     } 
-    #anoCursado, #dataNascimento, #anos{
+    #anoCursado, #anos{
         width: 50%;
+    }
+
+    #dataNascimento{
+        width: 80%;
     }
     
     #temPai{
